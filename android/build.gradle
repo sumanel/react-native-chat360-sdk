@@ -105,7 +105,7 @@ repositories {
 }
 
 def kotlin_version = getExtOrDefault("kotlinVersion")
-def chat360_android_version = '1.2.3'
+def chat360_android_version = '1.2.4'
 
 dependencies {
   // For < 0.71, this will be from the local maven repo
@@ -114,6 +114,7 @@ dependencies {
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   implementation "com.github.sumanel:chat360-android-sdk:$chat360_android_version"
+  implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3"
 }
 
 if (isNewArchitectureEnabled()) {
