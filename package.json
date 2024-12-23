@@ -1,6 +1,6 @@
 {
   "name": "react-native-chat360-sdk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "chat360-sdk",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
@@ -120,9 +120,7 @@
       "release": true
     },
     "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": "angular"
-      }
+
     }
   },
   "eslintConfig": {
