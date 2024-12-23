@@ -101,9 +101,11 @@ android {
 repositories {
   mavenCentral()
   google()
+  maven { url "https://jitpack.io" }
 }
 
 def kotlin_version = getExtOrDefault("kotlinVersion")
+def chat360_android_version = '1.2.3'
 
 dependencies {
   // For < 0.71, this will be from the local maven repo
@@ -111,6 +113,7 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation "com.github.sumanel:chat360-android-sdk:$chat360_android_version"
 }
 
 if (isNewArchitectureEnabled()) {
