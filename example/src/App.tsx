@@ -4,21 +4,22 @@ import { startChatBot } from 'react-native-chat360-sdk';
 
 export default function App() {
   const [botId, setBotId] = useState('');
-  const [appId, setAppId] = useState('');
   const [error, setError] = useState('');
 
   const handleLaunchBot = async () => {
-    if (!botId || !appId) {
+    if (!botId) {
       setError('Please enter both botId and appId');
       return;
     }
 
     try {
       // Launch the chatbot
-      await startChatBot(true, {
+      await startChatBot({
         botId: botId,
-        appId: appId,
-        meta: null, // Optionally, you can include additional meta data
+        metadata: {
+          userid: '123',
+          username: 'Harshit Sharma',
+        },
       }); // Pass 'true' for animation, or 'false' for no animation
       setError('');
     } catch (e: any) {
@@ -35,12 +36,6 @@ export default function App() {
         placeholder="Enter Bot ID"
         value={botId}
         onChangeText={setBotId}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Enter App ID"
-        value={appId}
-        onChangeText={setAppId}
       />
 
       {error ? <Text style={styles.error}>{error}</Text> : null}

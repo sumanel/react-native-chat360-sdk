@@ -25,9 +25,9 @@
     self = [super init];
     if (self) {
         _baseUrl = @"https://app.chat360.io/page?h=";
-        _stagingUrl = @"https://staging.chat360.io/page/?h=";
+        _stagingUrl = @"https://staging.chat360.io/page?h=";
         _botId = botId;
-        _appId = appId;
+        _appId = @"";
         _isDebug = isDebug;
         _flutter = flutter;
         _meta = meta;
@@ -62,7 +62,7 @@
 
 - (nullable NSURL *)createBaseUrlWithMetaString:(nullable NSString *)metaString {
     NSString *base = self.isDebug ? self.stagingUrl : self.baseUrl;
-    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@%@&store_session=1&app_id=%@&is_mobile=true&mobile=1", base, self.botId, self.appId];
+    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@%@&store_session=1&app_id=%@&is_mobile=true&mobile=1", base, self.botId, @""];
     
     if (metaString) {
         [urlString appendFormat:@"&meta=%@", metaString];

@@ -50,7 +50,7 @@
     self.webView = [[WKWebView alloc] initWithFrame:webViewFrame configuration:webViewConfig];
     self.webView.navigationDelegate = self;
     self.webView.translatesAutoresizingMaskIntoConstraints = false;
-    self.webView.scrollView.scrollEnabled = NO;
+    self.webView.scrollView.scrollEnabled = YES;
     [self.view addSubview:self.webView];
 }
 
