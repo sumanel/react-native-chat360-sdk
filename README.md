@@ -20,11 +20,7 @@ npm install react-native-chat360-sdk
 yarn add react-native-chat360-sdk
 ```
 
-For React Native versions 0.60 and above, the library supports automatic linking. If you are using an older version, manually link the package:
-
-```bash
-react-native link react-native-chat360-sdk
-```
+This SDK is tested for React Native versions : 0.76.0 onwards. 
 
 ### Android Permissions
 
