@@ -1,3 +1,3 @@
 export { default as Chat360 } from './Chat360';
-export { BotView } from './BotView';
-export { BotProvider, openBot, closeBot } from './BotProvider';
+export { Chat360BotScreen } from './BotScreen';
+export { Chat360BotProvider, openChat360Bot, closeChat360Bot } from './BotProvider';

@@ -8,15 +8,14 @@ import {
   StyleSheet,
 } from 'react-native';
 import Chat360 from './Chat360';
-import { BotView } from './BotView';
+import { Chat360BotView } from './BotView';
 
-let _open: ((opts?: { onPresented?: () => void }) => void) | null = null;
+let _open: ((opts?: { onPresented?: () => void; botConfig?: any }) => void) | null = null;
 let _close: (() => void) | null = null;
 
-export const BotProvider: React.FC<{
+export const Chat360BotProvider: React.FC<{
   children: React.ReactNode;
   botUrl?: string;
-  botConfig?: any;
   modalProps?: any;
   header?: React.ReactNode;
   closeButton?: React.ReactNode;
@@ -24,64 +23,69 @@ export const BotProvider: React.FC<{
 }> = ({
   children,
   botUrl: initialUrl,
-  botConfig,
   modalProps,
   header,
   closeButton,
   containerStyle,
 }) => {
-  const [visible, setVisible] = useState(false);
-  const [url, setUrl] = useState(initialUrl || '');
+    const [visible, setVisible] = useState(false);
+    const [url, setUrl] = useState(initialUrl || '');
 
-  _open = async ({ onPresented } = {}) => {
-    if (botConfig) {
-      try {
-        Chat360.setConfig(botConfig);
-        const built = await Chat360.startChatbot();
-        setUrl(built);
-      } catch (err) {
-        console.warn(err);
-        setUrl(initialUrl || '');
+    _open = async ({ onPresented, botConfig } = {}) => {
+      if (botConfig) {
+        try {
+          Chat360.setConfig(botConfig);
+          const built = await Chat360.startChatbot();
+          setUrl(built);
+          console.log(built)
+        } catch (err) {
+          console.warn(err);
+          setUrl(initialUrl || '');
+        }
       }
-    }
-    setVisible(true);
-    if (onPresented) onPresented();
-  };
+      setVisible(true);
+      if (onPresented) onPresented();
+    };
 
-  _close = () => {
-    setVisible(false);
-    Chat360.closeChatBot();
-  };
+    _close = () => {
+      setVisible(false);
+      Chat360.closeChat360Bot();
+    };
 
-  Chat360._onClose = _close;
+    Chat360._onClose = _close;
 
-  return (
-    <>
-      {children}
-      <Modal visible={visible} animationType="slide" {...modalProps}>
-        <SafeAreaView style={[styles.flex, containerStyle]}>
-          {header || (
-            <View style={styles.header}>
-              <TouchableOpacity onPress={() => _close && _close()}>
-                {closeButton || <Text>Close</Text>}
-              </TouchableOpacity>
+    return (
+      <>
+        {children}
+        <Modal visible={visible} animationType="slide" {...modalProps}>
+          <SafeAreaView style={[styles.flex, containerStyle]}>
+            {header || (
+              <View style={styles.header}>
+                <TouchableOpacity onPress={() => _close && _close()}>
+                  {closeButton || <Text style={{ color: 'black' }}>Close</Text>}
+                </TouchableOpacity>
+              </View>
+            )}
+
+            {/* Chat fills the rest of the screen */}
+            <View style={styles.chatContainer}>
+              <Chat360BotView url={url} style={styles.flex} />
             </View>
-          )}
-          <BotView url={url} style={styles.flex} />
-        </SafeAreaView>
-      </Modal>
-    </>
-  );
-};
+          </SafeAreaView>
 
-export const openBot = (opts?: { onPresented?: () => void }) => {
+        </Modal>
+      </>
+    );
+  };
+
+export const openChat360Bot = (opts?: { onPresented?: () => void; botConfig?: any }) => {
   if (_open) return _open(opts);
-  console.warn('BotProvider not mounted. Wrap your app with <BotProvider>.');
+  console.warn('Chat360BotProvider not mounted. Wrap your app with <Chat360BotProvider>.');
 };
 
-export const closeBot = () => {
+export const closeChat360Bot = () => {
   if (_close) return _close();
-  console.warn('BotProvider not mounted.');
+  console.warn('Chat360BotProvider not mounted.');
 };
 
 const styles = StyleSheet.create({
@@ -91,5 +95,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 12,
+    backgroundColor: '#fff',
+  },
+  chatContainer: {
+    flex: 1,
   },
 });

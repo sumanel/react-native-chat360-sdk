@@ -3,7 +3,7 @@ import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { WebView } from 'react-native-webview';
 import Chat360 from './Chat360';
 
-type BotViewProps = {
+type Chat360BotViewProps = {
   url: string;
   style?: any;
   onMessage?: (data: any) => void;
@@ -11,7 +11,7 @@ type BotViewProps = {
   loadingIndicator?: React.ReactNode;
 };
 
-export const BotView: React.FC<BotViewProps> = ({
+export const Chat360BotView: React.FC<Chat360BotViewProps> = ({
   url,
   style,
   containerStyle,
@@ -116,12 +116,12 @@ export const BotView: React.FC<BotViewProps> = ({
           )
         }
         style={[{ flex: 1 }, style]}
-        onLoadStart={() => console.log('[Chat360Bot] Bot started loading.')}
-        onLoadEnd={() => console.log('[Chat360Bot] Bot finished loading.')}
+        onLoadStart={() => console.log('[Chat360Bot] Chat360Bot started loading.')}
+        onLoadEnd={() => console.log('[Chat360Bot] Chat360Bot finished loading.')}
         onError={(syntheticEvent) => {
           const { nativeEvent } = syntheticEvent;
           console.log(
-            '[Chat360Bot] Bot failed with error:',
+            '[Chat360Bot] Chat360Bot failed with error:',
             nativeEvent.description
           );
         }}

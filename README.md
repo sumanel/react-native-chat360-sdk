@@ -8,38 +8,67 @@ npm install react-native-chat360-sdk react-native-webview
 ```
 
 ## Usage
+
+### Modal Chat360Bot (Recommended)
 ```tsx
 import React from 'react';
-import { BotProvider, openBot } from 'react-native-chat360-sdk';
-import Chat360 from 'react-native-chat360-sdk/src/Chat360';
+import { Chat360BotProvider, openChat360Bot } from 'react-native-chat360-sdk';
 
 export default function App() {
   return (
-    <BotProvider 
-      botConfig={{ botId: 'BOT', appId: 'APP', meta: { userId: '123' }, useNewUI: true }}
+    <Chat360BotProvider 
       modalProps={{ animationType: 'fade' }}
       header={<CustomHeader />}
       closeButton={<CustomCloseIcon />}
       containerStyle={{ backgroundColor: 'white' }}
     >
       <Home />
-    </BotProvider>
+    </Chat360BotProvider>
   );
 }
 
-// Open bot anywhere
-openBot();
+// Open Chat360Bot anywhere with configuration
+openChat360Bot({
+  botConfig: { 
+    botId: 'BOT', 
+    appId: 'APP', 
+    meta: { userId: '123' }, 
+    useNewUI: true 
+  },
+  onPresented: () => console.log('Chat360Bot opened')
+});
+```
+
+### Chat360Bot Screen Component
+```tsx
+import React from 'react';
+import { Chat360BotScreen } from 'react-native-chat360-sdk';
+
+export default function MyScreen() {
+  return (
+    <Chat360BotScreen
+      botConfig={{
+        botId: 'BOT',
+        appId: 'APP',
+        meta: { userId: '123' },
+        useNewUI: true
+      }}
+      containerStyle={{ margin: 8 }}
+      onMessage={(data) => console.log('Message:', data)}
+    />
+  );
+}
 ```
 
 For embedding:
 ```tsx
-import { BotView } from 'react-native-chat360-sdk';
-<BotView url={'https://app.chat360.io'} containerStyle={{ margin: 8 }} />
+import { Chat360BotView } from 'react-native-chat360-sdk';
+<Chat360BotView url={'https://app.chat360.io'} containerStyle={{ margin: 8 }} />
 ```
 
 ## Configuration Options
 
-### Bot Configuration:
+### Chat360Bot Configuration:
 - `botId` - Your Chat360 bot ID
 - `appId` - Your Chat360 app ID  
 - `meta` - Additional metadata object

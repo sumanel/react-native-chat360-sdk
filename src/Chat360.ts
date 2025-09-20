@@ -72,7 +72,7 @@ class Chat360 {
         ? JSON.stringify(this._config!.meta)
         : '';
 
-    return `${host}${path}/${botId}&store_session=1&app_id=${appId}&is_mobile=true&mobile=1&meta=${metaString}`;
+    return `${host}${path}${botId}&store_session=1&app_id=${appId}&is_mobile=true&mobile=1&meta=${metaString}`;
   }
 
   async startChatbot() {
@@ -80,7 +80,7 @@ class Chat360 {
     return this._buildUrl();
   }
 
-  async closeChatBot() {
+  async closeChat360Bot() {
     if (this._onClose) this._onClose();
   }
 
