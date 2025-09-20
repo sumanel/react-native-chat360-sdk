@@ -16,7 +16,7 @@ import { Chat360BotProvider, openChat360Bot } from 'react-native-chat360-sdk';
 
 export default function App() {
   return (
-    <Chat360BotProvider 
+    <Chat360BotProvider
       modalProps={{ animationType: 'fade' }}
       header={<CustomHeader />}
       closeButton={<CustomCloseIcon />}
@@ -29,11 +29,11 @@ export default function App() {
 
 // Open Chat360Bot anywhere with configuration
 openChat360Bot({
-  botConfig: { 
-    botId: 'BOT', 
-    appId: 'APP', 
-    meta: { userId: '123' }, 
-    useNewUI: true 
+  botConfig: {
+    botId: 'BOT',
+    appId: 'APP',
+    meta: { userId: '123' },
+    useNewUI: true
   },
   onPresented: () => console.log('Chat360Bot opened')
 });
@@ -60,19 +60,13 @@ export default function MyScreen() {
 }
 ```
 
-For embedding:
-```tsx
-import { Chat360BotView } from 'react-native-chat360-sdk';
-<Chat360BotView url={'https://app.chat360.io'} containerStyle={{ margin: 8 }} />
-```
-
 ## Configuration Options
 
 ### Chat360Bot Configuration:
 - `botId` - Your Chat360 bot ID
-- `appId` - Your Chat360 app ID  
+- `appId` - Your Chat360 app ID (You can send you app name in it)
 - `meta` - Additional metadata object
-- `baseUrl` - Custom base URL (defaults to `https://app.chat360.io`)
+- `baseUrl` - Custom base URL
 - `useNewUI` - Enable new UI experiment (defaults to `false`)
 
 ---
